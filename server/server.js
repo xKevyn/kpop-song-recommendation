@@ -3,6 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const lyricsFinder = require('lyrics-finder')
 const SpotifyWebApi = require('spotify-web-api-node')
+require('dotenv')
 
 const app = express()
 app.use(cors())
@@ -31,9 +32,9 @@ app.post('/refresh', (req, res) => {
 app.post('/login', (req, res) => {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
-        redirectUri: 'http://localhost:3000',
-        clientId: '377820e896ec41b09b03e1555e3c7ded',
-        clientSecret: '57e4cd2950ef4facb445ed2bcad279aa'
+        redirectUri: REDIRRECT_URI,
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET
     })
 
     spotifyApi.authorizationCodeGrant(code).then(data => {
